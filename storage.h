@@ -7,23 +7,27 @@
 #include <iostream>
 #include <vector>
 #include <cstdint>
+#include <algorithm>
 
 class storage {
 public:
     class Page{
     public:
         static const std::size_t PAGE_SIZE = 4096;
+        Page();
+        ~Page() = default;
+        void reset();
+        int getId() const;
+        void setId(int id2);
+        bool getDirty() const;
+        void setDirty(int dirty2);
+        int getPinCount() const;
+        void setPinCount(int pincount2);
+    private:
         std::vector<uint8_t> data;
         int id;
         bool dirty;
         int pincount;
-        Page(){
-            id = -1;
-            data.assign(PAGE_SIZE, 0);
-            dirty = false;
-            pincount = 0;
-        }
-
     };
 
 
